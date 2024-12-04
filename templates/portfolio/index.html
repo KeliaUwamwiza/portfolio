@@ -1,0 +1,190 @@
+{% block content %}
+{% load static %}
+
+<!-- Include theme stylesheet -->
+<link id="theme-style" rel="stylesheet" href="{% static 'portfolio/light.css' %}">
+
+<!-- Theme Switcher Button -->
+ <br>
+ <br>
+<button onclick="switchTheme()" class="theme-switcher">Switch Theme</button>
+<br>
+<!-- Main Content -->
+<div class="portfolio-container">
+    <header class="header">
+        <h1 class="greeting">WELCOME TO MY PORTFOILIO</h1>
+        {% if info.profile_image %}
+        <img src="{{ info.profile_image.url }}" alt="{{ info.name }}'s Profile" class="profile-image">
+    {% else %}
+        <p>No profile image available.</p>
+    {% endif %}
+        <h2 class="name">{{ info.name }}</h2>
+        <h3 class="profession">{{ info.profession }}</h3>
+        <p class="bio">{{ info.bio }}</p>
+    </header>
+
+    <section class="skills-section">
+        <h4 class="section-title">Skills</h4>
+        <ul class="skills-list">
+            {% for skill in skills_list %}
+                <li class="skill-item">{{ skill }}</li>
+            {% endfor %}
+        </ul>
+    </section>
+
+    <section class="experience-section">
+        <h4 class="section-title">Experience</h4>
+        <p>{{ info.experience }}</p>
+    </section>
+
+    <!-- Action Buttons -->
+    <div class="action-buttons">
+        <a href="{% url 'update_portfolio' %}" class="button update">Update Portfolio</a>
+        <a href="{% url 'delete_portfolio' %}" class="button delete" onclick="return confirm('Are you sure you want to delete this portfolio?')">Delete Portfolio</a>
+    </div>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const theme = localStorage.getItem("theme") || "light.css";
+        document.getElementById("theme-style").setAttribute("href", "{% static 'portfolio/' %}" + theme);
+    });
+
+    function switchTheme() {
+        const currentTheme = document.getElementById("theme-style").getAttribute("href");
+        const newTheme = currentTheme.includes("light.css") ? "dark.css" : "light.css";
+        document.getElementById("theme-style").setAttribute("href", "{% static 'portfolio/' %}" + newTheme);
+        localStorage.setItem("theme", newTheme); // Save theme preference to localStorage
+    }
+</script>
+
+<!-- Custom Styles (General Layout) -->
+<style>
+    
+    /* General Layout Styles */
+    body {
+        font-family: 'Arial', sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    .profile-image {
+        width: 100px;  /* Adjust as needed */
+        height: 100px;  /* Adjust as needed */
+        border-radius: 50%;  /* Makes the image circular */
+        object-fit: cover;  /* Ensures the image fits the box without distortion */
+        margin-bottom: 20px;  /* Adjust spacing */
+    }
+    
+
+    .portfolio-container {
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 40px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .header {
+        text-align: center;
+        margin-bottom: 30px;
+    }
+
+    .greeting {
+        font-size: 2.5em;
+        color: var(--primary-color);
+    }
+
+    .name {
+        font-size: 2em;
+        font-weight: bold;
+        color: var(--text-color);
+    }
+
+    .profession {
+        font-size: 1.5em;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+    }
+
+    .bio {
+        font-size: 1.1em;
+        color: var(--text-color);
+    }
+
+    .section-title {
+        font-size: 1.5em;
+        margin-bottom: 10px;
+        color: var(--text-color);
+    }
+
+    .skills-list {
+        list-style-type: none;
+        padding: 0;
+    }
+
+    .skill-item {
+        background-color: var(--skill-item-bg-color);
+        margin: 5px;
+        padding: 10px;
+        border-radius: 5px;
+        font-size: 1.1em;
+        color: var(--text-color);
+        transition: background-color 0.3s;
+    }
+
+    .skill-item:hover {
+        background-color: var(--skill-item-hover-bg-color);
+    }
+
+    /* Button Styles */
+    .button {
+        padding: 10px 20px;
+        color: var(--button-text-color);
+        text-decoration: none;
+        border-radius: 25px;
+        display: inline-block;
+        font-size: 1.2em;
+        margin-top: 20px;
+        text-align: center;
+        transition: background-color 0.3s, transform 0.3s;
+    }
+
+    .button:hover {
+        transform: translateY(-5px);
+    }
+
+    .update {
+        background-color: #28a745; /* Green for Update */
+    }
+
+    .delete {
+        background-color: #dc3545; /* Red for Delete */
+    }
+
+    /* Action Buttons */
+    .action-buttons {
+        text-align: center;
+    }
+
+    .theme-switcher {
+        background-color: var(--primary-color);
+        color: var(--button-text-color);
+        border: none;
+        padding: 12px 25px;
+        border-radius: 25px;
+        font-size: 1.2em;
+        cursor: pointer;
+        margin-bottom: 30px;
+        display: block;
+        margin: 0 auto;
+        transition: background-color 0.3s;
+    }
+
+    .theme-switcher:hover {
+        background-color: var(--button-hover-bg-color);
+    }
+</style>
+
+{% endblock %}

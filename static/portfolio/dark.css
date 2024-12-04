@@ -1,0 +1,112 @@
+/* dark.css */
+
+/* Define CSS variables for the dark theme */
+:root {
+    --bg-color: #121212;  /* Darker background for better contrast */
+    --text-color: #171616;  /* Lighter text color for readability */
+    --primary-color: #333333;  /* Subtle color for headings */
+    --button-bg-color: #444444;  /* Button background color */
+    --button-hover-bg-color: #555555;  /* Darker button on hover */
+    --skill-item-bg-color: #333333;  /* Dark background for skill items */
+    --skill-item-hover-bg-color: #555555;  /* Lighter hover background */
+    --button-text-color: #ffffff;  /* White text color for buttons */
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h1, h2, h3 {
+    color: var(--primary-color);
+    font-weight: normal;
+}
+
+button {
+    padding: 10px 20px;
+    background-color: var(--button-bg-color);
+    color: var(--button-text-color);
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: var(--button-hover-bg-color);
+}
+
+/* Styling for skill items (in a list or as individual tags) */
+.skill-item {
+    background-color: var(--skill-item-bg-color);
+    color: var(--text-color);
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 5px;
+    display: inline-block;
+    transition: background-color 0.3s;
+}
+
+.skill-item:hover {
+    background-color: var(--skill-item-hover-bg-color);
+}
+
+/* Add spacing and layout adjustments */
+.update-section {
+    padding: 20px;
+    background-color: #1a1a1a;
+    max-width: 800px;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.7);
+}
+
+.portfolio-form {
+    display: grid;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    color: var(--text-color);
+    margin-bottom: 5px;
+}
+
+.form-group input, .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background-color: #333;
+    color: var(--text-color);
+}
+
+.submit-btn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #45a049;
+}
+
+.cancel-link {
+    text-decoration: none;
+    color: #007BFF;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}

@@ -1,0 +1,74 @@
+
+
+{% block content %}
+{% load static %}
+
+<!-- Include theme stylesheet -->
+<link id="theme-style" rel="stylesheet" href="{% static 'portfolio/light.css' %}">
+
+<!-- Theme Switcher Button -->
+<div class="theme-switcher-container">
+    <button onclick="switchTheme()" class="theme-switcher">Switch Theme</button>
+</div>
+
+<!-- Portfolio Update Section -->
+<section class="update-section">
+    <h1>Update Your Portfolio</h1>
+
+    <!-- Form for updating personal info -->
+    <form method="POST" enctype="multipart/form-data" class="portfolio-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="id_name">Full Name</label>
+            {{ form.name }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_profession">Profession</label>
+            {{ form.profession }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_bio">Bio</label>
+            {{ form.bio }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_skills">Skills</label>
+            {{ form.skills }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_experience">Experience</label>
+            {{ form.experience }}
+        </div>
+
+        <div class="form-group">
+            <label for="id_profile_image">Profile Image</label>
+            {{ form.profile_image }}
+        </div>
+
+        <button type="submit" class="submit-btn">Update</button>
+    </form>
+
+    <!-- Cancel link -->
+    <a href="{% url 'portfolio' %}" class="cancel-link">Cancel</a>
+</section>
+<script>
+    function switchTheme() {
+        // Get the current theme style link
+        const themeStyle = document.getElementById('theme-style');
+        
+        // Check if it's currently pointing to light.css
+        if (themeStyle.getAttribute('href') === "{% static 'portfolio/light.css' %}") {
+            // Switch to dark mode by changing the href to dark.css
+            themeStyle.setAttribute('href', "{% static 'portfolio/dark.css' %}");
+        } else {
+            // Switch back to light mode by setting the href to light.css
+            themeStyle.setAttribute('href', "{% static 'portfolio/light.css' %}");
+        }
+    }
+</script>
+
+{% endblock content %}

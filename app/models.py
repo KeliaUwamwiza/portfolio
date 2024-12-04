@@ -1,17 +1,13 @@
 from django.db import models
-from django.contrib.auth.models import AbstractUser
-
-class CustomUser(AbstractUser):
-    bio = models.TextField(blank=True, null=True)
-    profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
-
-
-class Project(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    image = models.ImageField(upload_to='project_images/', blank=True, null=True)
-    created_at = models.DateTimeField(auto_now_add=True)
+class PersonalInfo(models.Model):
+    name = models.CharField(max_length=100)  # Full name
+    profession = models.CharField(max_length=100)  # Job title or profession
+    bio = models.TextField()  # Short biography
+    skills = models.TextField()  # Comma-separated skills
+    experience = models.TextField()  # Detailed experience
+    profile_image = models.ImageField(upload_to='profile_images/', blank=True, null=True)  # Optional profile picture
 
     def __str__(self):
-        return self.title
+        return self.name
+
 

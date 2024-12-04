@@ -1,0 +1,76 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Health Nexus{% endblock %}</title>
+    <!-- Add any necessary CSS or external stylesheets -->
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+ 
+    
+</head>
+<body>
+    <header>
+        <div class="cont-header">
+            <div class="logo">
+                <h1>PORT<span>FOLIO</span></h1>
+            </div>
+            <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+            <nav>
+                <ul>
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/portfolios">Portfolios</a></li>
+                    <li><a href="/features">Features</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                    {% comment %} <li><a href="{% url 'course_list' %}">Courses</a></li>
+                    <li><a href="{% url 'quiz_list' %}">Quizzes</a></li>
+                    <li><a href="{% url 'how-it-work' %}">How it works?</a></li>
+                    <li><a href="{% url 'about-us' %}">About us</a></li>
+                    <li><a href="{% url 'feedback' %}">Feedback</a></li> {% endcomment %}
+                </ul>
+            </nav>
+            {% if user.is_authenticated %}
+    <div class="profile">
+        <div class="dropdown">
+            {% if user.profile.image %}
+           <img src="{{ user.profile.image.url }}" alt="Profile Picture" class="dropbtn"> 
+        {% else %}
+           <img src="{% static 'images/profile.jpg' %}" alt="Default Profile Picture">
+        {% endif %}
+            <div class="dropdown-content">
+                <a href="#">My Dashboard</a>
+                <a href="#">My Profile</a>
+                <a href="#">Logout</a>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="profile">
+        <a href="{% url 'login' %}" class="join-now">JOIN NOW</a>
+    </div>
+{% endif %}
+
+        </div>
+    </header>
+    
+    <main>
+        
+        {% block content %}
+        
+        {% endblock %}
+    </main>
+
+    <footer>
+        <div class="container">
+            <ul class="menu-footer">
+                {% comment %} <li><a href="{% url 'privacy-policy' %}">Privacy Policy</a></li>
+                <li><a href="{% url 'terms-and-conditions' %}">Terms of Service</a></li>
+            </ul> {% endcomment %}
+            {% comment %} <p>&copy; {% now "Y" %} Uwamwiza Kelia. All rights reserved.</p> {% endcomment %}
+            <p> &copy; {% now "Y" %} ContentPortfolio. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
